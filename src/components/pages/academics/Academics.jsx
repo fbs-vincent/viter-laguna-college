@@ -10,7 +10,7 @@ const Academics = () => {
           <div className="font-sans text-gray-800">
             <Header />
             <section className="py-16 bg-blue-50">
-              <div className="container mx-auto px-4">
+              <div className="container mx-auto px-4 mt-[74px]">
                 <h2 className="text-3xl font-bold text-center text-blue-800 mb-12">
                   Learning Pathways
                 </h2>

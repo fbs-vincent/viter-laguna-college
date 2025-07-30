@@ -71,7 +71,7 @@ const Home = () => {
               className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] min-h-[300px] sm:min-h-[400px] overflow-hidden"
             >
               {/* Slides */}
-              <div className="relative h-full w-full">
+              <div className="relative h-full w-full mt-[74px]">
                 {banners.map((banner, index) => (
                   <div
                     key={index}
