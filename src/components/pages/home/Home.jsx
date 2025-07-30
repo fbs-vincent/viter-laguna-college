@@ -5,9 +5,9 @@ import Footer from "../../partials/Footer";
 const Home = () => {
   // Sample banner images (replace with your actual image URLs)
   const banners = [
-    "https://scontent.fmnl13-3.fna.fbcdn.net/v/t39.30808-6/484296137_1183844640194148_7280912995313320294_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeGG-xvvH7bnayuIUthZgBulJzomWB1IsmsnOiZYHUiya3MT7Vlz5NRvI2YzGaxbCbr3CgjGwSCMiCPPf-q4_8JC&_nc_ohc=hC0Fd2FjG6YQ7kNvwFokuDk&_nc_oc=AdnVrZCLb3mBPQci7Zo7zQW8YXpscCrwC7WdPABJs-IP07puzbVeilCuTlWrzm3oH5k&_nc_zt=23&_nc_ht=scontent.fmnl13-3.fna&_nc_gid=nO1LPOOxtWebXPlFCKHesw&oh=00_AfQzLzr78vrIuzlIH9YnMnwWabJMNHciFW32TS6vNXwuog&oe=688CC682",
-    "https://scontent.fmnl13-2.fna.fbcdn.net/v/t39.30808-6/356426600_776355610943055_7260072811407336626_n.png?stp=dst-jpg_tt6&_nc_cat=111&ccb=1-7&_nc_sid=86c6b0&_nc_eui2=AeF9U53cpu5-Erx0XJjhsor7D-st42HQ8n8P6y3jYdDyf3VMAFaTw55S3lD58-xfVAeOYFTzby1G1FLCZyBK-ArN&_nc_ohc=p4o69zav0NsQ7kNvwGNJFH4&_nc_oc=AdmjEiafketGwlmYVvVWrknHkg-YPb4fkXiGvvcg_2oqZa4GcOC3AeUn0iJRQslgr7c&_nc_zt=23&_nc_ht=scontent.fmnl13-2.fna&_nc_gid=E21YbtUgDhvyFC3atT0B-w&oh=00_AfQAZOsthjoU7lWbu_G0_0UPSBq_R9B_6JWOociaFskpHQ&oe=688CC74B",
-    "https://scontent.fmnl13-4.fna.fbcdn.net/v/t39.30808-6/471675422_1177673197278207_8856521980341633350_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=86c6b0&_nc_eui2=AeH9wpudsWdPiYrwawy7_47fcF620TeskblwXrbRN6yRuXN7gULuwdu4UdSntDMB4l3OsVeAPugNjT_CswVyMF2O&_nc_ohc=29yj7qqDv1kQ7kNvwEwPh37&_nc_oc=AdlH_N8CILS9CXFabwyQ677mGpKZhY985h4A6E41EB1Kjqi-BPqTKuFClb80vsy-Fo0&_nc_zt=23&_nc_ht=scontent.fmnl13-4.fna&_nc_gid=zrofG65B4tvhWI3TPyz30A&oh=00_AfRx3V1ddjXq_JjVna5Ra0p8t51-_BjMU3YQuiQhiT2_Yw&oe=688CCAFB",
+    "./image/banner1-1.jpg",
+    "./image/banner2-2.jpg",
+    "./image/banner3-3.jpg",
   ];
 
   const [currentSlide, setCurrentSlide] = React.useState(0);
@@ -71,22 +71,26 @@ const Home = () => {
               className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] min-h-[300px] sm:min-h-[400px] overflow-hidden"
             >
               {/* Slides */}
-              <div className="relative h-full w-full mt-[74px]">
+              <div
+                className="relative h-full w-full mt-[74px] bg-cover bg-center"
+                style={{ backgroundImage: `url(${banners[0]})` }}
+              >
                 {banners.map((banner, index) => (
                   <div
                     key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ${
-                      index === currentSlide
-                        ? "opacity-100"
-                        : "opacity-0 pointer-events-none"
+                    className={`absolute inset-0 transition-opacity duration-800 ease-in-out ${
+                      index === currentSlide ? "opacity-100" : "opacity-0"
                     }`}
+                    style={{
+                      zIndex: index === currentSlide ? 2 : 1,
+                    }}
                   >
                     {/* Responsive aspect ratio container */}
                     <div className="w-full h-full aspect-[16/9] md:aspect-[21/9] mx-auto">
                       <img
                         src={banner}
                         alt={`Banner ${index + 1}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-top"
                         loading={index === 0 ? "eager" : "lazy"} // Optimize loading
                       />
                     </div>
@@ -94,10 +98,39 @@ const Home = () => {
                 ))}
               </div>
 
+              {/* Banner Text Overlay - Left Side */}
+              <div className="absolute inset-0 z-10 flex items-center justify-center lg:justify-start">
+                <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center lg:justify-start">
+                  <div className="max-w-lg text-center lg:text-left">
+                    {/* Semi-transparent background */}
+                    {/* <div className="bg-black/60 backdrop-blur-sm p-6 sm:p-8 rounded-lg"> */}
+                    <div>
+                      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight drop-shadow-lg md:w-[553px]">
+                        Celebrating a Century of Academic Excellence
+                      </h1>
+                      <p className="text-lg sm:text-xl text-gray-200 mb-6 leading-relaxed drop-shadow-md">
+                        Scientia, Patria, Libertas
+                      </p>
+                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                        {/* <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors duration-200">
+                          Enroll Now
+                        </button> */}
+                        <button className="bg-white hover:bg-blue-700 hover:text-white text-blue-800 px-6 py-3 rounded-lg font-semibold transition-colors duration-200">
+                          Enroll Now
+                        </button>
+                        <button className="border-2 border-white text-white hover:bg-white hover:text-blue-700 px-6 py-3 rounded-lg font-semibold transition-colors duration-200">
+                          Courses
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* Navigation arrows (hidden on touch devices) */}
               <button
                 onClick={goToPrev}
-                className="hidden sm:block absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-1 md:p-2 rounded-full hover:bg-black/70 transition"
+                className="hidden sm:block absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-1 md:p-2 rounded-full hover:bg-black/70 transition z-20"
                 aria-label="Previous slide"
               >
                 <svg
@@ -117,7 +150,7 @@ const Home = () => {
               </button>
               <button
                 onClick={goToNext}
-                className="hidden sm:block absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-1 md:p-2 rounded-full hover:bg-black/70 transition"
+                className="hidden sm:block absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-1 md:p-2 rounded-full hover:bg-black/70 transition z-20"
                 aria-label="Next slide"
               >
                 <svg
@@ -138,14 +171,14 @@ const Home = () => {
 
               {/* Touch swipe area (for mobile) */}
               <div
-                className="sm:hidden absolute inset-0 z-10"
+                className="sm:hidden absolute inset-0 z-5"
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
               ></div>
 
               {/* Dots indicator (larger on mobile) */}
-              <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex space-x-2">
+              <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
                 {banners.map((_, index) => (
                   <button
                     key={index}
@@ -162,13 +195,13 @@ const Home = () => {
             </section>
 
             {/* About Us */}
-            <section id="about" className="py-16 bg-white">
-              <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center text-blue-800 mb-12">
+            <section id="about" className="py-20 bg-white">
+              <div className="container mx-auto px-6 lg:px-8">
+                <h2 className="text-3xl font-bold text-center text-blue-800 mb-16">
                   About Laguna College
                 </h2>
 
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 gap-10 lg:gap-12">
                   {/* History Section */}
                   <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition">
                     <div className="h-48 overflow-hidden">
@@ -178,17 +211,17 @@ const Home = () => {
                         className="w-full h-full object-cover object-top"
                       />
                     </div>
-                    <div className="p-6">
-                      <h3 className="text-2xl font-semibold text-blue-700 mb-4">
+                    <div className="p-8">
+                      <h3 className="text-2xl font-semibold text-blue-700 mb-6">
                         Our History
                       </h3>
-                      <p className="text-gray-700 mb-4">
+                      <p className="text-gray-700 mb-6 leading-relaxed">
                         Founded in 1923, Laguna College has been a pillar of
                         education in San Pablo City for nearly a century. Our
                         institution was established with the vision of providing
                         quality education to the youth of Laguna.
                       </p>
-                      <p className="text-gray-700">
+                      <p className="text-gray-700 leading-relaxed">
                         As we approach our centennial celebration, we continue
                         to uphold the traditions of excellence that have defined
                         our institution for generations.
@@ -205,17 +238,17 @@ const Home = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-6">
-                      <h3 className="text-2xl font-semibold text-blue-700 mb-4">
+                    <div className="p-8">
+                      <h3 className="text-2xl font-semibold text-blue-700 mb-6">
                         Mission & Vision
                       </h3>
-                      <p className="text-gray-700 mb-4">
+                      <p className="text-gray-700 mb-6 leading-relaxed">
                         Our mission is to develop competent and ethical
                         individuals who will contribute to nation-building
                         through the values of "Scientia, Patria, Libertas"
                         (Knowledge, Country, Liberty).
                       </p>
-                      <p className="text-gray-700">
+                      <p className="text-gray-700 leading-relaxed">
                         We envision Laguna College as a premier educational
                         institution that produces graduates who excel in their
                         chosen fields while maintaining strong moral character.
@@ -224,13 +257,13 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className="mt-8 bg-blue-800 text-white p-4 md:p-6 rounded-lg text-center">
-                  <h3 className="text-xl md:text-2xl font-semibold mb-2 md:mb-4">
+                <div className="mt-12 bg-blue-800 text-white p-8 md:p-10 rounded-lg text-center">
+                  <h3 className="text-xl md:text-2xl font-semibold mb-6 md:mb-8">
                     Accreditation
                   </h3>
 
                   {/* Accreditation Logos - Responsive Grid */}
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 my-3 md:my-6 px-2">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:gap-8 my-8 md:my-10 px-4">
                     {/* PACU-COA Logo */}
                     <div className="flex flex-col items-center">
                       <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-white rounded-full p-1 flex items-center justify-center shadow-md">
@@ -242,7 +275,7 @@ const Home = () => {
                           decoding="async"
                         />
                       </div>
-                      <span className="text-xs sm:text-sm mt-2 opacity-90">
+                      <span className="text-xs sm:text-sm mt-3 opacity-90">
                         PACU-COA
                       </span>
                     </div>
@@ -258,7 +291,7 @@ const Home = () => {
                           decoding="async"
                         />
                       </div>
-                      <span className="text-xs sm:text-sm mt-2 opacity-90">
+                      <span className="text-xs sm:text-sm mt-3 opacity-90">
                         CHED
                       </span>
                     </div>
@@ -274,7 +307,7 @@ const Home = () => {
                           decoding="async"
                         />
                       </div>
-                      <span className="text-xs sm:text-sm mt-2 opacity-90">
+                      <span className="text-xs sm:text-sm mt-3 opacity-90">
                         ISO 9001
                       </span>
                     </div>
@@ -290,13 +323,13 @@ const Home = () => {
                           decoding="async"
                         />
                       </div>
-                      <span className="text-xs sm:text-sm mt-2 opacity-90">
+                      <span className="text-xs sm:text-sm mt-3 opacity-90">
                         Quality
                       </span>
                     </div>
                   </div>
 
-                  <p className="mt-3 md:mt-4 text-sm sm:text-base px-2 sm:px-4">
+                  <p className="mt-6 md:mt-8 text-sm sm:text-base px-4 sm:px-6 leading-relaxed">
                     Laguna College holds PACU-COA Level II re-accreditation for
                     programs including Liberal Arts, Education, and Commerce,
                     ensuring the quality of our academic offerings. Our
@@ -308,13 +341,13 @@ const Home = () => {
             </section>
 
             {/* Academics */}
-            <section id="academics" className="py-16 bg-blue-50">
-              <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center text-blue-800 mb-12">
+            <section id="academics" className="py-20 bg-blue-50">
+              <div className="container mx-auto px-6 lg:px-8">
+                <h2 className="text-3xl font-bold text-center text-blue-800 mb-16">
                   Academic Programs
                 </h2>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                   {/* Kindergarten */}
                   <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition hover:-translate-y-1 overflow-hidden">
                     <div className="h-40 bg-blue-50 overflow-hidden">
@@ -324,9 +357,9 @@ const Home = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-6">
-                      <div className="flex items-center mb-3">
-                        <div className="bg-blue-100 text-blue-700 p-2 rounded-full mr-3">
+                    <div className="p-8">
+                      <div className="flex items-center mb-4">
+                        <div className="bg-blue-100 text-blue-700 p-2 rounded-full mr-4">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -346,7 +379,7 @@ const Home = () => {
                           Kindergarten
                         </h3>
                       </div>
-                      <p className="text-gray-700">
+                      <p className="text-gray-700 leading-relaxed">
                         Play-based learning program developing early literacy,
                         numeracy, and social skills in a nurturing environment.
                       </p>
@@ -362,9 +395,9 @@ const Home = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-6">
-                      <div className="flex items-center mb-3">
-                        <div className="bg-blue-100 text-blue-700 p-2 rounded-full mr-3">
+                    <div className="p-8">
+                      <div className="flex items-center mb-4">
+                        <div className="bg-blue-100 text-blue-700 p-2 rounded-full mr-4">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -384,7 +417,7 @@ const Home = () => {
                           Elementary
                         </h3>
                       </div>
-                      <p className="text-gray-700">
+                      <p className="text-gray-700 leading-relaxed">
                         Strong foundation in core subjects while nurturing
                         creativity and character development.
                       </p>
@@ -400,9 +433,9 @@ const Home = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-6">
-                      <div className="flex items-center mb-3">
-                        <div className="bg-blue-100 text-blue-700 p-2 rounded-full mr-3">
+                    <div className="p-8">
+                      <div className="flex items-center mb-4">
+                        <div className="bg-blue-100 text-blue-700 p-2 rounded-full mr-4">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -422,7 +455,7 @@ const Home = () => {
                           Junior High School
                         </h3>
                       </div>
-                      <p className="text-gray-700">
+                      <p className="text-gray-700 leading-relaxed">
                         Balanced academic program with exploratory tracks in
                         STEM, arts, and leadership.
                       </p>
@@ -438,9 +471,9 @@ const Home = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-6">
-                      <div className="flex items-center mb-3">
-                        <div className="bg-blue-100 text-blue-700 p-2 rounded-full mr-3">
+                    <div className="p-8">
+                      <div className="flex items-center mb-4">
+                        <div className="bg-blue-100 text-blue-700 p-2 rounded-full mr-4">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -460,7 +493,7 @@ const Home = () => {
                           Senior High School
                         </h3>
                       </div>
-                      <p className="text-gray-700">
+                      <p className="text-gray-700 leading-relaxed">
                         Specialized strands in STEM, ABM, HUMSS, and TVL with
                         industry immersion.
                       </p>
@@ -476,9 +509,9 @@ const Home = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-6">
-                      <div className="flex items-center mb-3">
-                        <div className="bg-blue-100 text-blue-700 p-2 rounded-full mr-3">
+                    <div className="p-8">
+                      <div className="flex items-center mb-4">
+                        <div className="bg-blue-100 text-blue-700 p-2 rounded-full mr-4">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -500,7 +533,7 @@ const Home = () => {
                           College
                         </h3>
                       </div>
-                      <p className="text-gray-700">
+                      <p className="text-gray-700 leading-relaxed">
                         Bachelor's degrees in Business, Education, Computer
                         Science, and Healthcare fields.
                       </p>
@@ -516,9 +549,9 @@ const Home = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-6">
-                      <div className="flex items-center mb-3">
-                        <div className="bg-blue-100 text-blue-700 p-2 rounded-full mr-3">
+                    <div className="p-8">
+                      <div className="flex items-center mb-4">
+                        <div className="bg-blue-100 text-blue-700 p-2 rounded-full mr-4">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="h-6 w-6"
@@ -538,7 +571,7 @@ const Home = () => {
                           Graduate School
                         </h3>
                       </div>
-                      <p className="text-gray-700">
+                      <p className="text-gray-700 leading-relaxed">
                         Advanced degrees for professionals with flexible
                         schedules and research opportunities.
                       </p>
@@ -549,36 +582,42 @@ const Home = () => {
             </section>
 
             {/* Admissions */}
-            <section id="admissions" className="py-16 bg-white">
-              <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center text-blue-800 mb-12">
+            <section id="admissions" className="py-20 bg-white">
+              <div className="container mx-auto px-6 lg:px-8">
+                <h2 className="text-3xl font-bold text-center text-blue-800 mb-16">
                   Admissions
                 </h2>
 
-                <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
+                <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 max-w-6xl mx-auto">
                   {/* Left Column - Content */}
-                  <div className="lg:w-1/2 bg-blue-50 p-8 rounded-lg">
-                    <h3 className="text-2xl font-semibold text-blue-700 mb-4">
+                  <div className="lg:w-1/2 bg-blue-50 p-10 rounded-lg">
+                    <h3 className="text-2xl font-semibold text-blue-700 mb-6">
                       Application Process
                     </h3>
-                    <ol className="list-decimal pl-5 space-y-3 text-gray-700">
-                      <li>
+                    <ol className="list-decimal pl-6 space-y-4 text-gray-700 mb-8">
+                      <li className="leading-relaxed">
                         Submit completed application form with required
                         documents
                       </li>
-                      <li>
+                      <li className="leading-relaxed">
                         Take the entrance examination (for certain programs)
                       </li>
-                      <li>Attend an interview with the admissions committee</li>
-                      <li>Receive acceptance notification</li>
-                      <li>Complete enrollment requirements</li>
+                      <li className="leading-relaxed">
+                        Attend an interview with the admissions committee
+                      </li>
+                      <li className="leading-relaxed">
+                        Receive acceptance notification
+                      </li>
+                      <li className="leading-relaxed">
+                        Complete enrollment requirements
+                      </li>
                     </ol>
 
-                    <div className="mt-6 bg-blue-100 p-4 rounded">
-                      <h4 className="font-semibold text-blue-800 mb-2">
+                    <div className="mt-8 bg-blue-100 p-6 rounded">
+                      <h4 className="font-semibold text-blue-800 mb-4">
                         Requirements:
                       </h4>
-                      <ul className="list-disc pl-5 space-y-1 text-gray-700">
+                      <ul className="list-disc pl-6 space-y-2 text-gray-700">
                         <li>Form 138 (Report Card) for incoming freshmen</li>
                         <li>Certificate of Good Moral Character</li>
                         <li>2x2 ID photos</li>
@@ -586,10 +625,10 @@ const Home = () => {
                       </ul>
                     </div>
 
-                    <div className="mt-6 text-center">
+                    <div className="mt-8 text-center">
                       <a
                         href="#contact"
-                        className="inline-block bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800 transition"
+                        className="inline-block bg-blue-700 text-white px-8 py-3 rounded hover:bg-blue-800 transition"
                       >
                         Contact Admissions
                       </a>
@@ -609,13 +648,13 @@ const Home = () => {
             </section>
 
             {/* News & Events */}
-            <section id="news" className="py-16 bg-blue-50">
-              <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center text-blue-800 mb-12">
+            <section id="news" className="py-20 bg-blue-50">
+              <div className="container mx-auto px-6 lg:px-8">
+                <h2 className="text-3xl font-bold text-center text-blue-800 mb-16">
                   News & Events
                 </h2>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                   {/* Science Fair */}
                   <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
                     <div className="h-48 overflow-hidden">
@@ -625,21 +664,21 @@ const Home = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-6">
-                      <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold inline-block mb-3">
+                    <div className="p-8">
+                      <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold inline-block mb-4">
                         Upcoming
                       </div>
-                      <h3 className="text-xl font-semibold text-blue-700 mb-2">
+                      <h3 className="text-xl font-semibold text-blue-700 mb-3">
                         Science Fair 2023
                       </h3>
-                      <p className="text-gray-600 mb-3">October 15-17, 2023</p>
-                      <p className="text-gray-700 mb-4">
+                      <p className="text-gray-600 mb-4">October 15-17, 2023</p>
+                      <p className="text-gray-700 mb-6 leading-relaxed">
                         Annual science fair showcasing student projects and
                         innovations in STEM fields.
                       </p>
                       <a
                         href="#"
-                        className="text-blue-600 hover:underline flex items-center"
+                        className="text-blue-600 hover:underline flex items-center font-medium"
                       >
                         Read more <span className="ml-1">→</span>
                       </a>
@@ -655,23 +694,23 @@ const Home = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-6">
-                      <div className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold inline-block mb-3">
+                    <div className="p-8">
+                      <div className="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold inline-block mb-4">
                         Recent
                       </div>
-                      <h3 className="text-xl font-semibold text-blue-700 mb-2">
+                      <h3 className="text-xl font-semibold text-blue-700 mb-3">
                         Sports Festival
                       </h3>
-                      <p className="text-gray-600 mb-3">
+                      <p className="text-gray-600 mb-4">
                         September 28-30, 2023
                       </p>
-                      <p className="text-gray-700 mb-4">
+                      <p className="text-gray-700 mb-6 leading-relaxed">
                         Intramurals featuring basketball, volleyball, badminton,
                         and other sports competitions.
                       </p>
                       <a
                         href="#"
-                        className="text-blue-600 hover:underline flex items-center"
+                        className="text-blue-600 hover:underline flex items-center font-medium"
                       >
                         Read more <span className="ml-1">→</span>
                       </a>
@@ -687,21 +726,21 @@ const Home = () => {
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="p-6">
-                      <div className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold inline-block mb-3">
+                    <div className="p-8">
+                      <div className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-semibold inline-block mb-4">
                         Announcement
                       </div>
-                      <h3 className="text-xl font-semibold text-blue-700 mb-2">
+                      <h3 className="text-xl font-semibold text-blue-700 mb-3">
                         Enrollment Schedule
                       </h3>
-                      <p className="text-gray-600 mb-3">SY 2023-2024</p>
-                      <p className="text-gray-700 mb-4">
+                      <p className="text-gray-600 mb-4">SY 2023-2024</p>
+                      <p className="text-gray-700 mb-6 leading-relaxed">
                         Enrollment for the next school year begins May 15, 2023.
                         Early registrants receive discounts.
                       </p>
                       <a
                         href="#"
-                        className="text-blue-600 hover:underline flex items-center"
+                        className="text-blue-600 hover:underline flex items-center font-medium"
                       >
                         See full schedule <span className="ml-1">→</span>
                       </a>
@@ -712,23 +751,23 @@ const Home = () => {
             </section>
 
             {/* Contact */}
-            <section id="contact" className="py-16 bg-white">
-              <div className="container mx-auto px-4">
-                <h2 className="text-3xl font-bold text-center text-blue-800 mb-12">
+            <section id="contact" className="py-20 bg-white">
+              <div className="container mx-auto px-6 lg:px-8">
+                <h2 className="text-3xl font-bold text-center text-blue-800 mb-16">
                   Contact Us
                 </h2>
 
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-2 gap-10 lg:gap-12">
                   {/* Contact Info */}
                   <div>
-                    <h3 className="text-2xl font-semibold text-blue-700 mb-4">
+                    <h3 className="text-2xl font-semibold text-blue-700 mb-6">
                       Get in Touch
                     </h3>
 
-                    <div className="space-y-4">
+                    <div className="space-y-6">
                       <div className="flex items-start">
                         <svg
-                          className="w-5 h-5 text-blue-700 mt-1 mr-3"
+                          className="w-5 h-5 text-blue-700 mt-1 mr-4"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -746,7 +785,7 @@ const Home = () => {
                             d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                           />
                         </svg>
-                        <p className="text-gray-700">
+                        <p className="text-gray-700 leading-relaxed">
                           Paseo de Escudero cor. Zulueta St.,
                           <br />
                           San Pablo City, Laguna,
@@ -757,7 +796,7 @@ const Home = () => {
 
                       <div className="flex items-center">
                         <svg
-                          className="w-5 h-5 text-blue-700 mr-3"
+                          className="w-5 h-5 text-blue-700 mr-4"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -772,9 +811,9 @@ const Home = () => {
                         <p className="text-gray-700">(049) 562-8077 / 78</p>
                       </div>
 
-                      <div className="flex items-center">
+                      <div className="flex items-start">
                         <svg
-                          className="w-5 h-5 text-blue-700 mr-3"
+                          className="w-5 h-5 text-blue-700 mr-4 mt-1"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -786,17 +825,15 @@ const Home = () => {
                             d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                           />
                         </svg>
-                        <p className="text-gray-700">
-                          General Inquiries: info@lagunacollege.edu.ph
-                          <br />
-                          Registrar: registrar@lagunacollege.edu.ph
-                          <br />
-                          Basic Education: basiced@lagunacollege.edu.ph
-                        </p>
+                        <div className="text-gray-700 leading-relaxed">
+                          <p>General Inquiries: info@lagunacollege.edu.ph</p>
+                          <p>Registrar: registrar@lagunacollege.edu.ph</p>
+                          <p>Basic Education: basiced@lagunacollege.edu.ph</p>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="mt-8 h-64 bg-gray-200 rounded-lg overflow-hidden">
+                    <div className="mt-10 h-64 bg-gray-200 rounded-lg overflow-hidden">
                       <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d123789.45678901234!2d121.3278!3d14.0667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDA0JzAwLjIiTiAxMjHCsDE5JzQwLjEiRQ!5e0!3m2!1sen!2sph!4v1620000000000!5m2!1sen!2sph"
                         width="100%"
@@ -811,22 +848,22 @@ const Home = () => {
 
                   {/* Contact Form */}
                   <div>
-                    <h3 className="text-2xl font-semibold text-blue-700 mb-4">
+                    <h3 className="text-2xl font-semibold text-blue-700 mb-6">
                       Send Us a Message
                     </h3>
 
-                    <form className="space-y-4">
+                    <form className="space-y-6">
                       <div>
                         <label
                           htmlFor="name"
-                          className="block text-gray-700 mb-1"
+                          className="block text-gray-700 mb-2 font-medium"
                         >
                           Full Name
                         </label>
                         <input
                           type="text"
                           id="name"
-                          className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                           placeholder="Your name"
                         />
                       </div>
@@ -834,14 +871,14 @@ const Home = () => {
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-gray-700 mb-1"
+                          className="block text-gray-700 mb-2 font-medium"
                         >
                           Email
                         </label>
                         <input
                           type="email"
                           id="email"
-                          className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                           placeholder="your.email@example.com"
                         />
                       </div>
@@ -849,13 +886,13 @@ const Home = () => {
                       <div>
                         <label
                           htmlFor="department"
-                          className="block text-gray-700 mb-1"
+                          className="block text-gray-700 mb-2 font-medium"
                         >
                           Department
                         </label>
                         <select
                           id="department"
-                          className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
                           <option value="">Select department</option>
                           <option value="admissions">Admissions</option>
@@ -870,21 +907,21 @@ const Home = () => {
                       <div>
                         <label
                           htmlFor="message"
-                          className="block text-gray-700 mb-1"
+                          className="block text-gray-700 mb-2 font-medium"
                         >
                           Your Inquiry
                         </label>
                         <textarea
                           id="message"
                           rows="4"
-                          className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                           placeholder="Type your message here..."
                         ></textarea>
                       </div>
 
                       <button
                         type="submit"
-                        className="bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800 transition"
+                        className="bg-blue-700 text-white px-8 py-3 rounded hover:bg-blue-800 transition font-medium"
                       >
                         Send Message
                       </button>

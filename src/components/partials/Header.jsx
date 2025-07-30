@@ -3,7 +3,6 @@ import React from "react";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  // Close menu when clicking on a link
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
@@ -11,7 +10,8 @@ const Header = () => {
   return (
     <>
       {/* Header */}
-      <header className="fixed w-full bg-blue-800 text-white shadow-md z-50">
+      {/* bg-blue-800 text-white */}
+      <header className="fixed w-full bg-white text-black shadow-md z-50">
         <div className="container mx-auto px-4 py-3 flex justify-between items-center">
           <div className="flex items-center">
             <img
@@ -20,53 +20,55 @@ const Header = () => {
               src="./image/logo.png"
               alt="Laguna College Logo"
             />
-            <h1 className="text-xl font-bold">Laguna College</h1>
+            <h1 className="text-[1.7rem] text-[#2c3884] font-bold">
+              Laguna College
+            </h1>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:block">
             <ul className="flex space-x-6">
               <li>
-                <a href="/" className="hover:text-blue-200 transition">
+                <a href="/" className="hover:text-blue-800 transition">
                   Home
                 </a>
               </li>
               <li>
-                <a href="/about" className="hover:text-blue-200 transition">
+                <a href="/about" className="hover:text-blue-800 transition">
                   About
                 </a>
               </li>
               <li>
-                <a href="/academics" className="hover:text-blue-200 transition">
+                <a href="/academics" className="hover:text-blue-800 transition">
                   Academics
                 </a>
               </li>
               <li>
                 <a
                   href="/admissions"
-                  className="hover:text-blue-200 transition"
+                  className="hover:text-blue-800 transition"
                 >
                   Admissions
                 </a>
               </li>
               <li>
-                <a href="/events" className="hover:text-blue-200 transition">
+                <a href="/events" className="hover:text-blue-800 transition">
                   News & Events
                 </a>
               </li>
               <li>
-                <a href="/contact" className="hover:text-blue-200 transition">
+                <a href="/contact" className="hover:text-blue-800 transition">
                   Contact
                 </a>
               </li>
             </ul>
           </nav>
 
-          {/* Mobile Burger Menu */}
+          {/* Mobile Burger Menu Button */}
           <button
             className="md:hidden focus:outline-none"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           >
             <svg
               className="w-6 h-6"
@@ -96,8 +98,29 @@ const Header = () => {
         {/* Full-screen Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden fixed inset-0 bg-blue-800 z-40 pt-20">
-            <div className="container mx-auto px-4">
-              <ul className="space-y-4 text-center">
+            {/* Close Button - Positioned at top right */}
+            <button
+              className="absolute top-4 right-4 p-2 focus:outline-none"
+              onClick={closeMenu}
+              aria-label="Close menu"
+            >
+              <svg
+                className="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+
+            <div className="container mx-auto px-4 h-full flex flex-col justify-center">
+              <ul className="space-y-6 text-center text-white">
                 <li>
                   <a
                     href="/"
